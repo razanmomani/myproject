@@ -33,12 +33,9 @@ dependencies:
   lottie: ^2.6.0
   google_fonts: ^5.1.0
   sizer: ^2.0.15
-  onboarding: ^3.1.0
   introduction_screen: ^3.1.11
-
-
-
-
+  smooth_page_indicator: ^1.1.0
+  shared_preferences: ^2.2.1
   flutter:
     sdk: flutter
 

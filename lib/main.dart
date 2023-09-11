@@ -9,11 +9,13 @@ import 'package:exam2/screen/my_home.dart';
 import 'package:exam2/screen/project.dart';
 import 'package:exam2/screen/sliver_appbar.dart';
 import 'package:exam2/screen/splach/splach_screen.dart';
-import 'package:exam2/screen/text_form_fielld.dart';
+import 'package:exam2/utils/helpers/shared_preferences_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+//  await SharedPreferencesHelper.init();
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -22,12 +24,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context,orientation,deviceType) {
-      return MaterialApp(
+      return const MaterialApp(
         home: SplachScreen(),
         debugShowCheckedModeBanner: false,
       );
     }
     );
-
   }
 }

@@ -10,7 +10,6 @@ class RadioaModel{
      this.color,
 });
 }
-
 List<RadioaModel> listRadio=[
   RadioaModel(
       title: 'Weight Loss',

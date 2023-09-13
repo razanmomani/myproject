@@ -8,7 +8,6 @@ import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 import '../../config/cashe_key.dart';
 import '../login/login_screen.dart';
-
 class SplachScreen extends StatefulWidget {
   const SplachScreen({super.key});
   @override

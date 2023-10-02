@@ -5,13 +5,13 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController _controllerusername =TextEditingController();
+   TextEditingController  _controllerusername = TextEditingController();
   TextEditingController _controllerpasswrad =TextEditingController();
-  bool isclone =false;
+  bool  isclone =false;
   bool isCleked=false;
   String ?userNameEroor;
   String ?passwordEroor;
-  FocusNode _userFous=FocusNode();//المؤشر
+  FocusNode  _userFous=FocusNode();//المؤشر
   FocusNode _passwordFoucs=FocusNode();
   @override
   Widget build(BuildContext context) {
@@ -62,41 +62,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 errorText:userNameEroor ,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Colors.black,width: 20,strokeAlign: 10),
+                  borderSide: const BorderSide(color: Colors.black,width: 20,strokeAlign: 10),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.black,width: 5,),
+                  borderSide:  const BorderSide(color: Colors.black,width: 5,),
 
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.black,width: 7),
+                  borderSide:const BorderSide(color: Colors.black,width: 7),
                 ),
 
               errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.red,width: 7),
+                  borderSide:const BorderSide(color: Colors.red,width: 7),
                 ),
 
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.red,width: 7),
+                  borderSide:const BorderSide(color: Colors.red,width: 7),
                 ),
-                label: Text('user name',style: TextStyle(color: Colors.black),),
-                prefixIcon: Icon(Icons.account_circle),
-                prefixStyle: TextStyle(color: Colors.black),
+                label:const Text('user name',style: TextStyle(color: Colors.black),),
+                prefixIcon: const Icon(Icons.account_circle),
+                prefixStyle:const TextStyle(color: Colors.black),
                 hintText: 'name',
-                suffixIcon: Icon(Icons.abc),
+                suffixIcon:const Icon(Icons.abc),
               ),
               onTap: (){
               print('razjamf');
               },
               onChanged: (c){
-              print('ajd');
+               print('ajd');
               },
               onSubmitted: (lkfdkl){
-              print('a');
+               print('a');
               },
               controller: _controllerusername,
             ),
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //  cursorWidth: 20,
               //    cursorHeight: 20,
               //   cursorRadius:Radius.circular(12),
-              style: TextStyle(color: Colors.teal,fontSize: 20),
+              style:const TextStyle(color: Colors.teal,fontSize: 20),
               // autocorrect: false,
               // textInputAction: TextInputAction.newline,
               // textInputAction: TextInputAction.go,
@@ -130,31 +130,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 errorText: passwordEroor,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Colors.black,width: 20,strokeAlign: 10),
+                  borderSide:const BorderSide(color: Colors.black,width: 20,strokeAlign: 10),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.black,width: 5,),
+                  borderSide:const BorderSide(color: Colors.black,width: 5,),
 
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.black,width: 7),
+                  borderSide:const BorderSide(color: Colors.black,width: 7),
                 ),
 
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.red,width: 7),
+                  borderSide:const BorderSide(color: Colors.red,width: 7),
                 ),
 
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.red,width: 7),
+                  borderSide:const BorderSide(color: Colors.red,width: 7),
                 ),
-                label: Text('passward',style: TextStyle(color: Colors.black),),
+                label:const  Text('passward',style: TextStyle(color: Colors.black),),
                 hintText: 'pass',
-                prefixIcon: Icon(Icons.password),
-                suffixIcon: Icon(Icons.remove_red_eye_sharp),
+                prefixIcon:const Icon( Icons.password),
+                suffixIcon:const Icon(Icons.remove_red_eye_sharp),
 
               ),
               onTap: (){
@@ -204,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 isCleked=true;
               });
             },
-                child: Text(
+                child: const Text(
                   'button',
                 ),),
             if(isclone==false)

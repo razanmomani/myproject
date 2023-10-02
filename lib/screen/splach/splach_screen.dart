@@ -49,7 +49,7 @@ class _SplachScreenState extends State<SplachScreen> {
     Timer(const Duration(seconds: 5), () async {
       bool? isIntroEnteredBefore = await SharedPreferencesHelper()
           .read(key: CasheKeys.introKey, type: SaveType.boolType) as bool?;
-      Fip5Navigator.of(context).pushReplacement(
+       Fip5Navigator.of(context).pushReplacement(
           isIntroEnteredBefore != null && isIntroEnteredBefore == true
               ? const LoginScreen()
               : const IntroScreen());

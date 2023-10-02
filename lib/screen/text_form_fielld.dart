@@ -76,7 +76,7 @@ class _TextForFielldState extends State<TextForFielld> {
                       print('the sucssed');
                     }
                   },
-                  child:Text(
+                  child:const Text(
                     'Submet',
 
                 ),),
@@ -89,10 +89,10 @@ class _TextForFielldState extends State<TextForFielld> {
       ),
     );
   }
-  OutlineInputBorder _bulidOutlinInbutBorder(){
+  OutlineInputBorder  _bulidOutlinInbutBorder(){
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: Colors.black,width: 7),
+      borderSide:const BorderSide(color: Colors.black,width: 7),
     );
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 class ListViewd extends StatefulWidget {
   const ListViewd({super.key});
   @override
@@ -11,8 +10,8 @@ class _ListViewdState extends State<ListViewd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_forward),
-        title: Text('Barking'),
+        leading:const Icon(Icons.arrow_forward),
+        title:const Text('Barking'),
       ),
       body: Container(
         color: Colors.green,
@@ -22,9 +21,9 @@ class _ListViewdState extends State<ListViewd> {
          // itemExtent: 90,
         //  reverse: true,
         // primary:false ,
-          padding: EdgeInsetsDirectional.all(20),
-          physics: ClampingScrollPhysics(),
-          prototypeItem: Text('dfjnjn'),
+          padding:const EdgeInsetsDirectional.all(20),
+          physics: const ClampingScrollPhysics(),
+          prototypeItem: const Text('dfjnjn'),
           dragStartBehavior:DragStartBehavior.start ,
       /*    addAutomaticKeepAlives: true,
           addRepaintBoundaries: true,
@@ -37,7 +36,7 @@ class _ListViewdState extends State<ListViewd> {
 
 
 
-          children: [
+          children:const [
             Text('c++'),
             Text('c++'),
             Text('c++'),

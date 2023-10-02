@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:exam2/screen/regeester/regester_controller.dart';
+import 'package:exam2/screen/regeester/regester_con.dart';
 import 'package:exam2/utils/helpers/navigte.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

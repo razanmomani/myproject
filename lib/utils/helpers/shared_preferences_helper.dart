@@ -1,11 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
+
 class SharedPreferencesHelper {
   //singleton
   static final SharedPreferencesHelper _shared =
       SharedPreferencesHelper._private();
   factory SharedPreferencesHelper() => _shared;
   SharedPreferencesHelper._private();
-  Future<void> save({required String key, required dynamic value, required SaveType type}) async {
+  Future<void> save(
+      {required String key,
+      required dynamic value,
+      required SaveType type}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     switch (type) {
       case SaveType.boolType:
@@ -62,6 +66,7 @@ class SharedPreferencesHelper {
     }
   }
 }
+
 enum SaveType {
   stringType,
   boolType,

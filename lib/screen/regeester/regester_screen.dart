@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:exam2/screen/regeester/model_regester.dart';
 import 'package:exam2/screen/regeester/regester_con.dart';
 import 'package:exam2/utils/helpers/navigte.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,9 @@ class _RegesterScreenState extends State<RegesterScreen> {
   FocusNode emailFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
   FocusNode mobileFocus = FocusNode();
-  XFile? file;
-  final GlobalKey formKey = GlobalKey<FormState>();
+  XFile? xFile;
   bool _isPasswordObscure = true;
-  final RegesterController controller = Get.put(RegesterController());
+  RegesterController controlle = Get.put(RegesterController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +36,23 @@ class _RegesterScreenState extends State<RegesterScreen> {
         height: 30,
         child: Center(
           child: CommunViews().createButton(
-              title: 'Regester',
-              onPressed: () {
-                controller.createEmailWithPassword(
-                    emailController.text, passwordController.text);
-              }),
+            title: 'Regester',
+            onPressed: () async {
+              File file = File(xFile!.path);
+              UserModel model = UserModel(
+                email: emailController.text,
+                password: passwordController.text,
+                mobile: mobilePhoneName.text,
+                imgUrl: '',
+              );
+              model.file = file;
+              controlle.createRegesterEmailAndPassword(model);
+            },
+          ),
         ),
       ),
       body: Form(
-        key: formKey,
+        key: controlle.formKey,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9),
@@ -58,25 +66,26 @@ class _RegesterScreenState extends State<RegesterScreen> {
                   () => CommunViews().createTextFormFiled(
                       controller: emailController,
                       focusNode: emailFocus,
-                      label: 'User Name',
-                      errorText: controller.emailError.value.isEmpty
+                      label: 'email',
+                      errorText: controlle.emailErorr.value.isEmpty
                           ? null
-                          : controller.emailError.value,
+                          : controlle.emailErorr.value,
                       keyboardType: TextInputType.name,
                       InputActione: TextInputAction.next,
                       onSubmitted: (v) {
                         passwordFocus.requestFocus();
                       }),
                 ),
+
                 const SizedBox(height: AppConstant.textFiledSpacing),
                 Obx(
                   () => CommunViews().createTextFormFiled(
                       controller: passwordController,
                       focusNode: passwordFocus,
                       label: 'Password',
-                      errorText: controller.passwordError.value.isEmpty
+                      errorText: controlle.passwordErorr.value.isEmpty
                           ? null
-                          : controller.passwordError.value,
+                          : controlle.passwordErorr.value,
                       isObscuer: _isPasswordObscure,
                       suffixIcon: InkWell(
                         onTap: () {
@@ -139,7 +148,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                     ),
                     onTap: () async {
                       Fip5Navigator.of(context).pop();
-                      file = await _getImage(ImageSource.camera);
+                      xFile = await _getImage(ImageSource.camera);
                       setState(() {});
                     },
                   ),
@@ -159,7 +168,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                     ),
                     onTap: () async {
                       Fip5Navigator.of(context).pop();
-                      file = await _getImage(ImageSource.gallery);
+                      xFile = await _getImage(ImageSource.gallery);
                       setState(() {});
                     },
                   ),
@@ -175,9 +184,9 @@ class _RegesterScreenState extends State<RegesterScreen> {
           border: Border.all(color: Colors.black, width: 2),
         ),
         child: Center(
-          child: file == null
+          child: xFile == null
               ? Lottie.asset('assets/pickanimated.json')
-              : Image.file(File(file!.path)),
+              : Image.file(File(xFile!.path)),
         ),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 class CommunViews {
   static final CommunViews _shared = CommunViews._private();
 
@@ -10,13 +12,12 @@ class CommunViews {
   //widget appBar
   AppBar getAppBar({required String title}) {
     return AppBar(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.teal,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(50))),
       title: Text(title,
-        style: const TextStyle(
-          //  backgroundColor: Colors.red,
-          fontSize: 19,
+        style:GoogleFonts.alkalami(
+          fontSize: 20.sp,
         ),
       ),
       centerTitle: true,

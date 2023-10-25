@@ -25,7 +25,6 @@ class _IntroScreenState extends State<IntroScreen> {
       ),
     );
   }
-
   PageController nextPage = PageController(initialPage: 0);
   int _currentPage = 0;
   @override

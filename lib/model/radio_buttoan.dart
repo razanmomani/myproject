@@ -14,7 +14,6 @@ class _RadioOptionsWidgetState extends State<RadioOptionsWidget> {
       selectedOption = value;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

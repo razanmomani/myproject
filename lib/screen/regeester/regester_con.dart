@@ -1,105 +1,95 @@
+import 'dart:io';
+import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam2/config/firebase_expations/erorr_mgs.dart';
+import 'package:exam2/screen/login/login_screen.dart';
+import 'package:exam2/screen/regeester/model_regester.dart';
+import 'package:exam2/utils/helpers/navigte.dart';
 import 'package:exam2/utils/ui/commun_views.dart';
 import 'package:exam2/utils/ui/loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class RegesterController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  RxString emailError = ''.obs;
-  RxString passwordError = ''.obs;
-  Future<void> createEmailWithPassword(String email, String password) async {
-    if (isValed(email, password)) {
+  RxString emailErorr = ''.obs;
+  RxString passwordErorr = ''.obs;
+  GlobalKey formKey = GlobalKey<FormState>();
+  Future<void> createRegesterEmailAndPassword(UserModel userModel) async {
+    if (isValed(userModel.email, userModel.password ?? '')) {
       try {
-        LoadingScreen.shard.startLoading(Get.context!);
+        LoadingScreen.shared.startLoading(Get.context);
         var result = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
-        LoadingScreen.shard.stopLoading();
+            email: userModel.email, password: userModel.password!);
         if (result.user != null) {
-          CommunViews().showSnackBar('Success', 'Regester Success');
+          userModel.uid = result.user!.uid;
+         userModel.imgUrl=await saveImageStorge(userModel.file!);
+          getRegesterFirestoreLogin(userModel);
         } else {
+          LoadingScreen.shared.stopeLoading();
           CommunViews().showSnackBar('Failed', 'Regester UnSuccess');
         }
         FocusManager.instance.primaryFocus!.unfocus();
-      } catch (error) {
-        LoadingScreen.shard.stopLoading();
-        if (error is FirebaseException) {
+      } catch (erorr) {
+        LoadingScreen.shared.stopeLoading();
+        if (erorr is FirebaseException) {
           CommunViews()
-              .showSnackBar('Failed', FirebaseErrors.getMessage(error.code));
+              .showSnackBar('Failed', FirebaseErrors.getMessage(erorr.code));
         } else {
-          CommunViews().showSnackBar('Failed', 'Regester UnSuccess');
-          FocusManager.instance.primaryFocus!.unfocus();
+          CommunViews().showSnackBar('Failed', 'Regester UnSuccess $erorr');
         }
+        FocusManager.instance.primaryFocus!.unfocus();
       }
     }
   }
   bool isValed(String email, String password) {
-    emailError.value = '';
-    passwordError.value = '';
+    emailErorr.value = '';
+    passwordErorr.value = '';
     if (email.isEmpty) {
-      emailError.value = 'you must the email';
+      emailErorr.value = 'Email is Required';
       return false;
     } else if (password.isEmpty) {
-      passwordError.value = 'You must enter the password';
+      passwordErorr.value = ' password is Required ';
       return false;
     } else if (password.length < 6) {
-      passwordError.value = 'The maximum password is 6 or more';
+      passwordErorr.value = 'please enter Strong password';
       return false;
     }
     return true;
   }
-}
 
-
-/*
-import 'package:exam2/config/firebase_expations/erorr_mgs.dart';
-import 'package:exam2/utils/ui/commun_views.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import '../../utils/ui/loading_screen.dart';
-class RegesterController extends GetxController{
-  final FirebaseAuth _auth=FirebaseAuth.instance;
-  RxString emailError=''.obs;
-  RxString passwordError=''.obs;
-  Future<void> createWithEmailAndPassword(String email,String password)async{
-  if(isValed(email,password)){
-    try{
-      LoadingScreen.shred.startLoading(Get.context!);
-      var result=await _auth.createUserWithEmailAndPassword(
-          email: email,
-          password: password);
-      LoadingScreen.shred.stopLoading();
-      if(result.user !=null){
-        CommunViews().showSnackBar('Success', 'Regester Success');
-      }else{
-        CommunViews().showSnackBar('Failed', 'Regester UnSuccess');
+  //firebase regester firestore
+  void getRegesterFirestoreLogin(UserModel userModel) async {
+    try {
+      var collection = FirebaseFirestore.instance.collection('users');
+      await collection.add(userModel.toMap());
+      LoadingScreen.shared.stopeLoading();
+      CommunViews().showSnackBar('Success', 'Regester Success');
+      Fip5Navigator.of(Get.context!).pushReplacement(LoginScreen());
+    } catch (erorr) {
+      if (erorr is FirebaseException) {
+        CommunViews()
+            .showSnackBar('Failed', FirebaseErrors.getMessage(erorr.code));
       }
-      FocusManager.instance.primaryFocus!.unfocus();
-    }catch(erorr){
-      if(erorr is FirebaseException){
-        CommunViews().showSnackBar('Failed' ,FirebaseErrors.getMessage(erorr.code));
-      }
-      LoadingScreen.shred.stopLoading();
-      CommunViews().showSnackBar('Failed', 'Regester UnSuccess');
-      FocusManager.instance.primaryFocus!.unfocus();
     }
   }
-  }
-bool isValed(String email,String password){
-    emailError.value='';
-    passwordError.value='';
-    if(email.isEmpty){
-      emailError.value='You must enter an email';
-      return false;
-    }else if(password.isEmpty){
-      passwordError.value='You must enter an password';
-      return false;
-    }else if(password.length<6){
-      passwordError.value='The password must be 6 or more';
-      return false;
-    }return true;
-}
-}
 
-*/
+
+  //storge image in firebase
+  Future<String> saveImageStorge(File imgFile) async {
+    try {
+      Reference storgeReference = FirebaseStorage.instance.ref();
+      String fileName =
+          "fox5${DateTime.now().microsecondsSinceEpoch}${(Random().nextInt(1000))}";
+      Reference imageRef=storgeReference.child("image/$fileName.jpg");
+      await imageRef.putFile(imgFile);
+      return imageRef.getDownloadURL();
+    } catch (erorr){
+      if(erorr is FirebaseException){
+        CommunViews().showSnackBar('Failed', FirebaseErrors.getMessage(erorr.code));
+      }
+      return "";
+    }
+  }
+}

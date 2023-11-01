@@ -8,13 +8,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import '../../config/app_constants/app_constant.dart';
 import '../../utils/ui/commun_views.dart';
-
 class RegesterScreen extends StatefulWidget {
   const RegesterScreen({Key? key}) : super(key: key);
   @override
   State<RegesterScreen> createState() => _RegesterScreenState();
 }
-
 class _RegesterScreenState extends State<RegesterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -38,15 +36,18 @@ class _RegesterScreenState extends State<RegesterScreen> {
           child: CommunViews().createButton(
             title: 'Regester',
             onPressed: () async {
-              File file = File(xFile!.path);
+             // File file = File(xFile!.path);
               UserModel model = UserModel(
                 email: emailController.text,
                 password: passwordController.text,
                 mobile: mobilePhoneName.text,
                 imgUrl: '',
               );
-              model.file = file;
-              controlle.createRegesterEmailAndPassword(model);
+          //    model.file = file;
+           //   controlle.createRegesterEmailAndPassword(model);
+              // regester with Api
+              controlle.registerWithApi(model);
+
             },
           ),
         ),

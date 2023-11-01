@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 class ProdectModel {
   int? id;
   String? title;
@@ -18,37 +19,33 @@ class ProdectModel {
     this.rating,
   });
 
-  factory ProdectModel.fromJson(String str) => ProdectModel.fromMap(json.decode(str));
+  factory ProdectModel.fromJson(String str) =>
+      ProdectModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory ProdectModel.fromMap(Map<String, dynamic> json) => ProdectModel(
-    id: json["id"],
-    title: json["title"],
-    price: json["price"]?.toDouble(),
-    description: json["description"],
-    category: json["category"]!,
-    image: json["image"],
-    rating: json["rating"] == null ? null : Rating.fromMap(json["rating"]),
-  );
+        id: json["id"],
+        title: json["title"],
+        price: json["price"]?.toDouble(),
+        description: json["description"],
+        category: json["category"]!,
+        image: json["image"],
+        rating: json["rating"] == null ? null : Rating.fromMap(json["rating"]),
+      );
 
   Map<String, dynamic> toMap() => {
-    "id": id,
-    "title": title,
-    "price": price,
-    "description": description,
-    "category": category,
-    "image": image,
-    "rating": rating?.toMap(),
-  };
+        "id": id,
+        "title": title,
+        "price": price,
+        "description": description,
+        "category": category,
+        "image": image,
+        "rating": rating?.toMap(),
+      };
 }
 
-enum Category {
-  ELECTRONICS,
-  JEWELERY,
-  MEN_S_CLOTHING,
-  WOMEN_S_CLOTHING
-}
+enum Category { ELECTRONICS, JEWELERY, MEN_S_CLOTHING, WOMEN_S_CLOTHING }
 
 final categoryValues = EnumValues({
   "electronics": Category.ELECTRONICS,
@@ -71,14 +68,14 @@ class Rating {
   String toJson() => json.encode(toMap());
 
   factory Rating.fromMap(Map<String, dynamic> json) => Rating(
-    rate: json["rate"]?.toDouble(),
-    count: json["count"],
-  );
+        rate: json["rate"]?.toDouble(),
+        count: json["count"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "rate": rate,
-    "count": count,
-  };
+        "rate": rate,
+        "count": count,
+      };
 }
 
 class EnumValues<T> {

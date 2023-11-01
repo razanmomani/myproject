@@ -1,3 +1,4 @@
+import 'package:exam2/screen/login/model_log.dart';
 import 'package:exam2/screen/regeester/model_regester.dart';
 class CurentSession{
   //singiltoan
@@ -6,6 +7,7 @@ class CurentSession{
 
 CurentSession._privet();
 
-UserModel  ? model;
+UserModel?users;
+ApiUser?myUser;
 }
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:exam2/screen/login/login_screen.dart';
 import 'package:exam2/screen/regeester/regester_screen.dart';
 import 'package:exam2/screen/splach/intro_screen.dart';
 import 'package:exam2/utils/helpers/navigte.dart';
@@ -49,7 +50,7 @@ class _SplachScreenState extends State<SplachScreen> {
           .read(key: CasheKeys.introKey, type: SaveType.boolType) as bool?;
       Fip5Navigator.of(context).pushReplacement(
           isIntroEnteredBefore != null && isIntroEnteredBefore == true
-              ?const RegesterScreen()
+              ?const LoginScreen()
               : const IntroScreen());
     });
   }

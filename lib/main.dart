@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return   GetMaterialApp(
-        home:ProdectScreen(),
+        home:
+        //ProdectScreen(),
+        SplachScreen(),
         debugShowCheckedModeBanner: false,
       );
     });

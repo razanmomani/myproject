@@ -16,17 +16,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-
-  TextEditingController mobilePhoneName = TextEditingController();
-
-  FocusNode emailFocus = FocusNode();
-
-  FocusNode passwordFocus = FocusNode();
-
-  FocusNode mobileFocus = FocusNode();
 
   XFile? xFile;
   LoginController controlle = Get.put(LoginController());
@@ -44,8 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Obx(
                 () => CommunViews().createTextFormFiled(
-                    controller: emailController,
-                    focusNode: emailFocus,
+                    controller: controlle. emailController,
+                    focusNode:controlle. emailFocus,
                     label: 'email',
                     errorText: controlle.emailErorr.value.isEmpty
                         ? null
@@ -53,14 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.name,
                     InputActione: TextInputAction.next,
                     onSubmitted: (v) {
-                      passwordFocus.requestFocus();
+                      controlle.  passwordFocus.requestFocus();
                     }),
               ),
               const SizedBox(height: AppConstant.textFiledSpacing),
               Obx(
                 () => CommunViews().createTextFormFiled(
-                    controller: passwordController,
-                    focusNode: passwordFocus,
+                    controller:controlle. passwordController,
+                    focusNode:controlle. passwordFocus,
                     label: 'Password',
                     errorText: controlle.passwordErorr.value.isEmpty
                         ? null
@@ -82,16 +71,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.text,
                     InputActione: TextInputAction.next,
                     onSubmitted: (v) {
-                      mobileFocus.requestFocus();
+                      controlle.  mobileFocus.requestFocus();
                     }),
               ),
               CommunViews().createButton(
                   title: 'Login',
                   onPressed: () {
-                    controlle.login(
-                        emailController.text, passwordController.text);
+                    //with firebase
+                   /* controlle.login(
+                        emailController.text, passwordController.text);*/
+                    /////////////////////////
+                    //with api
+                   controlle.loginWithApi(controlle.emailController.text,controlle.passwordController.text);
                   }),
-
               CommunViews().createButton(
                   title: 'Regester',
                   onPressed: () {
